@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://b5iy6usx1b1py"]
+
+[ext_resource type="Script" uid="uid://d4mfhw0wwe2lf" path="res://Scripts/control.gd" id="1_40h0n"]
+[ext_resource type="Texture2D" uid="uid://bgshgah8dk8sy" path="res://assetpack/assetpack/parallax/skies/Sky_sky.png" id="1_crttf"]
+[ext_resource type="FontFile" uid="uid://b0446j48onykx" path="res://assetpack/assetpack/parallax/Diary Story.otf" id="2_40h0n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_apop0"]
+texture = ExtResource("1_crttf")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bnl6i"]
+font = ExtResource("2_40h0n")
+font_size = 128
+font_color = Color(18.892157, 18.892157, 18.892157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13q51"]
+bg_color = Color(0, 0.47843137, 0.23137255, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0.47843137, 0.23137255, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y672a"]
+bg_color = Color(0, 0.47843137, 0.23137255, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.45490196, 0, 1, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crttf"]
+bg_color = Color(0, 0.47843137, 0.23137255, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+shadow_color = Color(6.6420434e-06, 0.92035836, 0.2097559, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40h0n"]
+bg_color = Color(0.9764706, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(1, 0, 0, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2dxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afmhm"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u0nc"]
+bg_color = Color(0.9764706, 0, 0, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+shadow_color = Color(0.64912313, 0.5351894, 0, 1)
+
+[node name="Menu" type="Control" unique_id=582068151]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_40h0n")
+
+[node name="Fundo" type="Panel" parent="." unique_id=1574086658]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 1004.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_apop0")
+
+[node name="Titulo" type="Label" parent="." unique_id=1410039619]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.0
+offset_right = 183.0
+offset_bottom = 142.0
+grow_horizontal = 2
+text = "VOAR!!!"
+label_settings = SubResource("LabelSettings_bnl6i")
+
+[node name="Botões" type="VBoxContainer" parent="." unique_id=1904077409]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -21.0
+offset_right = 76.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Iniciar" type="Button" parent="Botões" unique_id=877091934]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_40h0n")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_13q51")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y672a")
+theme_override_styles/hover = SubResource("StyleBoxFlat_crttf")
+text = "Jogar"
+
+[node name="Sair" type="Button" parent="Botões" unique_id=2086594851]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_40h0n")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_40h0n")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_w2dxx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_afmhm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6u0nc")
+text = "Sair"
+
+[connection signal="pressed" from="Botões/Iniciar" to="." method="_on_iniciar_pressed"]
+[connection signal="pressed" from="Botões/Sair" to="." method="_on_sair_pressed"]
