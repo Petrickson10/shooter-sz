@@ -6,6 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://bgshgah8dk8sy" path="res://assetpack/assetpack/parallax/skies/Sky_sky.png" id="3_wso6v"]
 [ext_resource type="Texture2D" uid="uid://csm4qeeq01ydb" path="res://assetpack/assetpack/parallax/skies/Sky_back_mountain.png" id="4_m2elh"]
 [ext_resource type="Texture2D" uid="uid://6i4pbakvvtpw" path="res://assetpack/assetpack/parallax/skies/sky_cloud_floor_2.png" id="5_2d0ts"]
+[ext_resource type="Script" uid="uid://bknqpeydeimsp" path="res://scripts/gerador_inimigos.gd" id="7_hvey0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnl6i"]
+size = Vector2(16, 660)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13q51"]
+size = Vector2(12, 658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60ekp"]
+size = Vector2(1164.5, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7irj"]
+size = Vector2(1169, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irv42"]
 atlas = ExtResource("1_cu2wc")
@@ -68,50 +81,37 @@ animations = [{
 radius = 38.0
 height = 284.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnl6i"]
-size = Vector2(16, 660)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_13q51"]
-size = Vector2(12, 658)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_60ekp"]
-size = Vector2(1164.5, 55)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7irj"]
-size = Vector2(1169, 20)
-
 [node name="Jogo" type="Node2D" unique_id=610075588]
 
+[node name="Paredes" type="StaticBody2D" parent="." unique_id=368576960]
+
+[node name="Esq" type="CollisionShape2D" parent="Paredes" unique_id=161394860]
+position = Vector2(-2, 320)
+shape = SubResource("RectangleShape2D_bnl6i")
+
+[node name="Dir" type="CollisionShape2D" parent="Paredes" unique_id=1068647717]
+position = Vector2(1154, 323)
+shape = SubResource("RectangleShape2D_13q51")
+
+[node name="Teto" type="CollisionShape2D" parent="Paredes" unique_id=246444483]
+position = Vector2(565.75, 673)
+shape = SubResource("RectangleShape2D_60ekp")
+
+[node name="Chao" type="CollisionShape2D" parent="Paredes" unique_id=1647386016]
+position = Vector2(574.5, 0)
+shape = SubResource("RectangleShape2D_o7irj")
+
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1420418691]
+position = Vector2(180, 355)
 script = ExtResource("1_irv42")
 
 [node name="ImagemPlayer" type="AnimatedSprite2D" parent="Player" unique_id=111787210]
-position = Vector2(186, 344)
 sprite_frames = SubResource("SpriteFrames_xixvn")
 autoplay = "default"
 
 [node name="CorpoPlayer" type="CollisionShape2D" parent="Player" unique_id=1357566107]
-position = Vector2(175, 337)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_icjsh")
-
-[node name="Paredes" type="StaticBody2D" parent="Player" unique_id=368576960]
-
-[node name="Esq" type="CollisionShape2D" parent="Player/Paredes" unique_id=161394860]
-position = Vector2(-2, 320)
-shape = SubResource("RectangleShape2D_bnl6i")
-
-[node name="Dir" type="CollisionShape2D" parent="Player/Paredes" unique_id=1068647717]
-position = Vector2(1154, 323)
-shape = SubResource("RectangleShape2D_13q51")
-
-[node name="Teto" type="CollisionShape2D" parent="Player/Paredes" unique_id=246444483]
-position = Vector2(565.75, 673)
-shape = SubResource("RectangleShape2D_60ekp")
-
-[node name="Chao" type="CollisionShape2D" parent="Player/Paredes" unique_id=1647386016]
-position = Vector2(574.5, 0)
-shape = SubResource("RectangleShape2D_o7irj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=776132823]
 script = ExtResource("3_oxeok")
@@ -127,7 +127,7 @@ texture = ExtResource("3_wso6v")
 motion_mirroring = Vector2(1152, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FundoMontanha" unique_id=1287162923]
-position = Vector2(947, 180)
+position = Vector2(949, 401)
 texture = ExtResource("4_m2elh")
 
 [node name="FrenteMontanha" type="ParallaxLayer" parent="ParallaxBackground" unique_id=585627596]
@@ -141,3 +141,12 @@ motion_mirroring = Vector2(1152, 3)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FrenteNuvens" unique_id=224335187]
 position = Vector2(953, 203)
 texture = ExtResource("5_2d0ts")
+
+[node name="GeradorInimigos" type="Node2D" parent="." unique_id=941861537]
+script = ExtResource("7_hvey0")
+
+[node name="Timer" type="Timer" parent="GeradorInimigos" unique_id=1676852485]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="GeradorInimigos/Timer" to="GeradorInimigos" method="_on_timer_timeout"]
